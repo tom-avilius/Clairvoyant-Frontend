@@ -1,5 +1,6 @@
 <template>
   <v-text-field
+    :rules="[rule]"
     v-model="query"
     class="spacing"
     label="Enter Query"
@@ -21,7 +22,7 @@
   <v-snackbar-queue
     v-model="errors"
     color="error"
-    timeout="1500"
+    timeout="2000"
     close-on-content-click="true"
   ></v-snackbar-queue>
 </template>
@@ -30,18 +31,35 @@
 import { ref, watch } from "vue";
 
 const errors = ref([]);
-const query = ref("");
 const loading = ref(false);
+const query = ref("");
 
-function load() {
+const rule = (v) => {
+  const wordCount = v.trim().split(/\s+/).filter(Boolean).length;
+
+  if (wordCount === 0) return "Query cannot be empty.";
+  if (wordCount < 4) return "Query must contain at least 4 words.";
+  if (wordCount > 100) return "Query must be below 100 words.";
+  return true;
+};
+
+async function load() {
   loading.value = true;
+
   const wordCount = query.value.trim().split(/\s+/).filter(Boolean).length;
 
-  if (wordCount < 4) {
+  if (wordCount == 0) {
+    errors.value.push("Query cannot be empty.");
+  } else if (wordCount < 4) {
     errors.value.push("Query must contain atleast 4 words.");
+  } else if (wordCount > 100) {
+    errors.value.push("Query must be below 100 words.");
+  } else {
+    queryError.value = false;
   }
 
-  setTimeout(() => (loading.value = false), 3000);
+  await new Promise((resolve) => setTimeout(resolve, 200));
+  loading.value = false;
 }
 </script>
 

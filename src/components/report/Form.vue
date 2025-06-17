@@ -16,8 +16,17 @@
       label="Tell us what happened."
       variant="outlined"
     ></v-textarea>
-    <v-btn class="mt-2" type="submit" block>Submit</v-btn>
+    <v-btn :loading="loading" class="mt-2" type="submit" @click="load" block
+      >Submit</v-btn
+    >
   </v-form>
+
+  <v-snackbar-queue
+    v-model="errorMsg"
+    color="error"
+    timeout="2000"
+    close-on-content-click="true"
+  ></v-snackbar-queue>
 </template>
 
 <script setup>
@@ -30,9 +39,30 @@ const errors = [
   "Something Else",
 ];
 
+const loading = ref(false);
 const selectedError = ref(null);
 const showTextArea = ref(false);
 const query = ref("");
+const errorMsg = ref([]);
+
+async function load() {
+  loading.value = true;
+
+  const wordCount = query.value.trim().split(/\s+/).filter(Boolean).length;
+
+  if (wordCount == 0) {
+    errorMsg.value.push("Query cannot be empty.");
+  } else if (wordCount < 4) {
+    errorMsg.value.push("Query must contain atleast 4 words.");
+  } else if (wordCount > 100) {
+    errorMsg.value.push("Query must be below 100 words.");
+  } else {
+    queryError.value = false;
+  }
+
+  await new Promise((resolve) => setTimeout(resolve, 200));
+  loading.value = false;
+}
 
 watch(selectedError, (newError, oldError) => {
   if (newError == errors[2] || newError == errors[3]) {

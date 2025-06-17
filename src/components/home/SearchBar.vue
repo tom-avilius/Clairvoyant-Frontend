@@ -1,5 +1,6 @@
 <template>
   <v-text-field
+    v-model="query"
     class="spacing"
     label="Enter Query"
     prepend-inner-icon="mdi-magnify"
@@ -14,16 +15,32 @@
       @click="load"
     >
       Submit
-    </v-btn></v-row
-  >
+    </v-btn>
+  </v-row>
+
+  <v-snackbar-queue
+    v-model="errors"
+    color="error"
+    timeout="1500"
+    close-on-content-click="true"
+  ></v-snackbar-queue>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
+const errors = ref([]);
+const query = ref("");
 const loading = ref(false);
+
 function load() {
   loading.value = true;
+  const wordCount = query.value.trim().split(/\s+/).filter(Boolean).length;
+
+  if (wordCount < 4) {
+    errors.value.push("Query must contain atleast 4 words.");
+  }
+
   setTimeout(() => (loading.value = false), 3000);
 }
 </script>

@@ -1,6 +1,10 @@
 <template>
   <v-form @submit.prevent>
-    <v-text-field label="Your query" variant="outlined"></v-text-field>
+    <v-text-field
+      v-model="query"
+      label="Your query"
+      variant="outlined"
+    ></v-text-field>
     <v-autocomplete
       v-model="selectedError"
       label="Select the error type."
@@ -28,6 +32,7 @@ const errors = [
 
 const selectedError = ref(null);
 const showTextArea = ref(false);
+const query = ref("");
 
 watch(selectedError, (newError, oldError) => {
   if (newError == errors[2] || newError == errors[3]) {

@@ -8,7 +8,9 @@
     </div>
 
     <div class="text-center inline">
-      <p class="text-caption"><v-icon icon="mdi-copyright" /> {{ date }}</p>
+      <p class="text-caption">
+        Copyright <v-icon icon="mdi-copyright" /> {{ date }}
+      </p>
     </div>
 
     <div class="text-right inline">

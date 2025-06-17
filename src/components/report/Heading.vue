@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <h4 class="text-h4 subtitle">
-      Did you notice inconsistency in the result?
+      Did you notice any inconsistency in the result?
     </h4>
     <h6 class="caption">Help us by reporting errors!</h6>
   </v-container>

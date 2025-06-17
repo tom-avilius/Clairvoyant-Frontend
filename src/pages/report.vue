@@ -1,3 +1,4 @@
 <template>
   <Heading />
+  <Form />
 </template>

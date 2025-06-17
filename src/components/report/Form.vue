@@ -2,29 +2,38 @@
   <v-form @submit.prevent>
     <v-text-field label="Your query" variant="outlined"></v-text-field>
     <v-autocomplete
+      v-model="selectedError"
       label="Select the error type."
-      :items="[
-        'Fake claim labelled as true.',
-        'True claim labelled as false.',
-        'Internal/Server Error',
-        'Something Else',
-      ]"
+      :items="errors"
       variant="outlined"
     ></v-autocomplete>
-    <v-textarea label="Tell us what happened." variant="outlined"></v-textarea>
+    <v-textarea
+      v-if="showTextArea"
+      label="Tell us what happened."
+      variant="outlined"
+    ></v-textarea>
     <v-btn class="mt-2" type="submit" block>Submit</v-btn>
   </v-form>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
-const firstName = ref("");
-
-const rules = [
-  (value) => {
-    if (value) return true;
-    return "You must enter a first name.";
-  },
+const errors = [
+  "Fake claim labelled as true.",
+  "True claim labelled as false.",
+  "Internal/Server Error",
+  "Something Else",
 ];
+
+const selectedError = ref(null);
+const showTextArea = ref(false);
+
+watch(selectedError, (newError, oldError) => {
+  if (newError == errors[2] || newError == errors[3]) {
+    showTextArea.value = true;
+  } else {
+    showTextArea.value = false;
+  }
+});
 </script>

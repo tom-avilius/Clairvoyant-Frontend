@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="margin">
     <h4 class="text-h4 subtitle">
       Did you notice any inconsistency in the result?
     </h4>
@@ -12,6 +12,10 @@
   font-size: 2.8rem !important;
   font-weight: 300;
   letter-spacing: 2px;
+}
+
+.margin {
+  margin-bottom: 40px;
 }
 
 .caption {

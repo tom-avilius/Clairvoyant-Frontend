@@ -1,7 +1,9 @@
 <template>
   <v-main>
     <AppBar />
-    <router-view />
+    <v-container class="spacing">
+      <router-view />
+    </v-container>
   </v-main>
 
   <AppFooter />
@@ -10,3 +12,9 @@
 <script lang="ts" setup>
 //
 </script>
+
+<style scoped>
+.spacing {
+  margin-top: 20px;
+}
+</style>

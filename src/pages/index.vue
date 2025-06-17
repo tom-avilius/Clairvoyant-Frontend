@@ -1,3 +1,4 @@
 <template>
   <Brand />
+  <SearchBar />
 </template>

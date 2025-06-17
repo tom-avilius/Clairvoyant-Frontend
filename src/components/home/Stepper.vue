@@ -37,4 +37,14 @@
 .text {
   padding-left: 16px !important;
 }
+@media (max-width: 1290px) {
+  .spacing {
+    margin-top: 60px;
+  }
+}
+@media (max-width: 710px) {
+  .spacing {
+    margin-top: 100px;
+  }
+}
 </style>

@@ -15,6 +15,8 @@
       variant="outlined"
     ></v-autocomplete>
     <v-textarea
+      :rules="[errorDescriptionRule]"
+      v-model="errorDescription"
       v-if="showTextArea"
       label="Tell us what happened."
       variant="outlined"
@@ -47,6 +49,7 @@ const selectedError = ref(null);
 const showTextArea = ref(false);
 const query = ref("");
 const errorMsg = ref([]);
+const errorDescription = ref("");
 
 const rule = (v) => {
   const wordCount = v.trim().split(/\s+/).filter(Boolean).length;
@@ -59,6 +62,11 @@ const rule = (v) => {
 
 const selectedErrorRule = (v) => {
   if (v === null) return "Error type cannot be empty.";
+  return true;
+};
+
+const errorDescriptionRule = (v) => {
+  if (v.trim().length < 20) return "Please enter atleast 20 characters.";
   return true;
 };
 
@@ -77,6 +85,12 @@ async function load() {
 
   if (selectedError.value == null) {
     errorMsg.value.push("Error type cannot be empty.");
+  }
+
+  if (errorDescription.value.trim().length < 20) {
+    errorMsg.value.push(
+      "Error description must contain atleast 20 characters.",
+    );
   }
 
   await new Promise((resolve) => setTimeout(resolve, 200));

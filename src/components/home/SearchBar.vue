@@ -54,9 +54,18 @@ async function load() {
     errors.value.push("Query must contain atleast 4 words.");
   } else if (wordCount > 100) {
     errors.value.push("Query must be below 100 words.");
-  } else {
-    queryError.value = false;
   }
+
+  const res = await fetch("http://127.0.0.1:8001/analyze", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ news: "NASA confirms alien life" }),
+  });
+
+  const data = await res.json();
+  console.log(data); // { score: 0.42 }
 
   await new Promise((resolve) => setTimeout(resolve, 200));
   loading.value = false;

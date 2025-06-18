@@ -1,7 +1,7 @@
 <template>
   <v-stepper class="spacing" editable :items="['Step 1', 'Step 2', 'Step 3']">
     <template v-slot:item.1>
-      <v-card title="Step One" flat>
+      <v-card title="Input" flat>
         <p class="text">
           Enter the fact or news you desire to verify in the search bar.
         </p>
@@ -9,17 +9,17 @@
     </template>
 
     <template v-slot:item.2>
-      <v-card title="Step Two" flat>
+      <v-card title="Processing" flat>
         <p class="text">Wait for the server to validate your query.</p>
       </v-card>
     </template>
 
     <template v-slot:item.3>
-      <v-card title="Step Three" flat>
+      <v-card title="Output" flat>
         <p class="text">
-          Once the validation is complete, the validation window would open to
-          show you the results. If the results are not what you expected, please
-          <v-btn>report</v-btn> to us.
+          Once the validation is complete, a window would open to display the
+          results. If the results are not what you expect, please
+          <v-btn to="/report">report</v-btn> to us.
         </p>
       </v-card>
     </template>

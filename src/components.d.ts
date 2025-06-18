@@ -12,6 +12,7 @@ declare module 'vue' {
     AppFooter: typeof import('./components/AppFooter.vue')['default']
     Brand: typeof import('./components/home/Brand.vue')['default']
     Form: typeof import('./components/report/Form.vue')['default']
+    Header: typeof import('./components/result/Header.vue')['default']
     Heading: typeof import('./components/report/Heading.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

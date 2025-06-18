@@ -1,9 +1,7 @@
 <template>
   <v-container class="margin">
-    <h4 class="text-h4 subtitle">
-      Did you notice any inconsistency in the result?
-    </h4>
-    <h6 class="caption">Help us by reporting errors!</h6>
+    <h4 class="text-h4 subtitle">The claim is probably {{ verdict }}.</h4>
+    <h6 class="caption">We found {{ report }} evidence.</h6>
   </v-container>
 </template>
 
@@ -42,3 +40,12 @@
   }
 }
 </style>
+
+<script setup>
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+const result = JSON.parse(route.query.result || "{}");
+const verdict = result >= 0 ? "TRUE" : "FALSE";
+const report = result >= 0 ? "similar" : "contradicting";
+</script>

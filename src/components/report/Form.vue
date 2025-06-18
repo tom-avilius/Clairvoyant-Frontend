@@ -8,6 +8,7 @@
       variant="outlined"
     ></v-text-field>
     <v-autocomplete
+      :rules="[selectedErrorRule]"
       v-model="selectedError"
       label="Select the error type."
       :items="errors"
@@ -56,6 +57,11 @@ const rule = (v) => {
   return true;
 };
 
+const selectedErrorRule = (v) => {
+  if (v === null) return "Error type cannot be empty.";
+  return true;
+};
+
 async function load() {
   loading.value = true;
 
@@ -67,8 +73,10 @@ async function load() {
     errorMsg.value.push("Query must contain atleast 4 words.");
   } else if (wordCount > 100) {
     errorMsg.value.push("Query must be below 100 words.");
-  } else {
-    queryError.value = false;
+  }
+
+  if (selectedError.value == null) {
+    errorMsg.value.push("Error type cannot be empty.");
   }
 
   await new Promise((resolve) => setTimeout(resolve, 200));

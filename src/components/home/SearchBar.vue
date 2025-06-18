@@ -29,6 +29,9 @@
 
 <script setup>
 import { ref, watch } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const errors = ref([]);
 const loading = ref(false);
@@ -65,7 +68,12 @@ async function load() {
   });
 
   const data = await res.json();
-  console.log(data); // { score: 0.42 }
+  router.push({
+    name: "Result",
+    query: {
+      result: JSON.stringify(data),
+    },
+  });
 
   await new Promise((resolve) => setTimeout(resolve, 200));
   loading.value = false;

@@ -64,14 +64,14 @@ async function load() {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ news: "NASA confirms alien life" }),
+    body: JSON.stringify({ news: query.value }),
   });
 
   const data = await res.json();
   router.push({
-    name: "Result",
+    path: "/result",
     query: {
-      result: JSON.stringify(data),
+      result: data.score,
     },
   });
 

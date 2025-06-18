@@ -1,6 +1,8 @@
 <template>
   <v-form @submit.prevent>
     <v-text-field
+      class="spacing"
+      :rules="[rule]"
       v-model="query"
       label="Your query"
       variant="outlined"
@@ -45,6 +47,15 @@ const showTextArea = ref(false);
 const query = ref("");
 const errorMsg = ref([]);
 
+const rule = (v) => {
+  const wordCount = v.trim().split(/\s+/).filter(Boolean).length;
+
+  if (wordCount === 0) return "Query cannot be empty.";
+  if (wordCount < 4) return "Query must contain at least 4 words.";
+  if (wordCount > 100) return "Query must be below 100 words.";
+  return true;
+};
+
 async function load() {
   loading.value = true;
 
@@ -72,3 +83,9 @@ watch(selectedError, (newError, oldError) => {
   }
 });
 </script>
+
+<style scoped>
+.spacing {
+  margin-bottom: 15px;
+}
+</style>

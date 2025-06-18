@@ -57,23 +57,23 @@ async function load() {
     errors.value.push("Query must contain atleast 4 words.");
   } else if (wordCount > 100) {
     errors.value.push("Query must be below 100 words.");
+  } else {
+    const res = await fetch("http://127.0.0.1:8001/analyze", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ news: query.value }),
+    });
+
+    const data = await res.json();
+    router.push({
+      path: "/result",
+      query: {
+        result: data.score,
+      },
+    });
   }
-
-  const res = await fetch("http://127.0.0.1:8001/analyze", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ news: query.value }),
-  });
-
-  const data = await res.json();
-  router.push({
-    path: "/result",
-    query: {
-      result: data.score,
-    },
-  });
 
   await new Promise((resolve) => setTimeout(resolve, 200));
   loading.value = false;

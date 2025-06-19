@@ -1,5 +1,12 @@
 <template>
   <v-container class="margin">
+    <v-text-field
+      v-model="result.query"
+      label="Your Query"
+      prepend-inner-icon="mdi-magnify"
+      variant="outlined"
+      disabled
+    ></v-text-field>
     <h4 class="text-h4 subtitle">The claim is probably {{ verdict }}.</h4>
     <h6 class="caption">We found {{ report }} evidence.</h6>
   </v-container>
@@ -46,6 +53,6 @@ import { useRoute } from "vue-router";
 
 const route = useRoute();
 const result = JSON.parse(route.query.result || "{}");
-const verdict = result >= 0 ? "TRUE" : "FALSE";
-const report = result >= 0 ? "similar" : "contradicting";
+const verdict = result.score >= 0 ? "TRUE" : "FALSE";
+const report = result.score >= 0 ? "similar" : "contradicting";
 </script>

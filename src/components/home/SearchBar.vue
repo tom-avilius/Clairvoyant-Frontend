@@ -73,7 +73,7 @@ async function load() {
     router.push({
       path: "/result",
       query: {
-        result: data.score,
+        result: JSON.stringify({ score: data.score, query: query.value }),
       },
     });
   }

@@ -1,5 +1,6 @@
 <template>
   <v-text-field
+    @keyup.enter="load"
     :rules="[rule]"
     v-model="query"
     class="spacing"

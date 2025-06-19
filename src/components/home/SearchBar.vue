@@ -28,6 +28,7 @@
 </template>
 
 <script setup>
+const emit = defineEmits(["update:submitBtnClick"]);
 import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
 
@@ -58,6 +59,7 @@ async function load() {
   } else if (wordCount > 100) {
     errors.value.push("Query must be below 100 words.");
   } else {
+    emit("update:submitBtnClick", true);
     const res = await fetch("http://127.0.0.1:8001/analyze", {
       method: "POST",
       headers: {

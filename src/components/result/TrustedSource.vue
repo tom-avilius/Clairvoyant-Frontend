@@ -6,9 +6,10 @@
     type="article"
   />
   <div class="padding" v-else>
-    <h4 class="text-h5 heading">Found a trusted source:</h4>
-    <h6 class="text-subtitle-1 subtitle">{{ data.source }}</h6>
-    <p class="text-body-1 text">{{ data.headline }}</p>
+    <h4 v-if="data.trusted" class="text-h5 heading">Found a trusted source:</h4>
+    <h4 v-else class="text-h5 heading">Found a source:</h4>
+    <h6 v-if="data" class="text-subtitle-1 subtitle">{{ data.source }}</h6>
+    <p v-if="data" class="text-body-1 text">{{ data.headline }}</p>
   </div>
 </template>
 

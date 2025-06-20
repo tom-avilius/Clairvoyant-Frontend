@@ -70,6 +70,7 @@ async function load() {
     });
 
     const data = await res.json();
+    sessionStorage.setItem("uuid", data.uuid);
     router.push({
       path: "/result",
       query: {

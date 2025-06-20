@@ -5,10 +5,10 @@
     :elevation="0"
     type="article"
   />
-  <div v-else>
-    <h4>Found a trusted source:</h4>
-    <h6>{{ data.source }}</h6>
-    <p>{{ data.headline }}</p>
+  <div class="padding" v-else>
+    <h4 class="text-h5 heading">Found a trusted source:</h4>
+    <h6 class="text-subtitle-1 subtitle">{{ data.source }}</h6>
+    <p class="text-body-1 text">{{ data.headline }}</p>
   </div>
 </template>
 
@@ -35,10 +35,7 @@ onMounted(async () => {
     ).then((res) => res.json());
 
     // Wait for both fetch and delay to finish
-    const [fetchedData] = await Promise.all([
-      fetchPromise,
-      delay(2000), // at least 1 second
-    ]);
+    const [fetchedData] = await Promise.all([fetchPromise, delay(2000)]);
 
     data.value = fetchedData;
   } catch (error) {
@@ -52,5 +49,27 @@ onMounted(async () => {
 <style scoped>
 .no-background {
   background: none !important;
+}
+
+.padding {
+  margin-left: 15px;
+}
+
+.subtitle {
+  margin-left: 10px;
+  font-weight: 400;
+  letter-spacing: 1px !important;
+  font-size: 1.1rem !important;
+}
+
+.text {
+  margin-left: 10px;
+  font-size: 1rem !important;
+  font-weight: 300 !important;
+}
+
+.heading {
+  font-size: 1.8rem !important;
+  font-weight: 300;
 }
 </style>

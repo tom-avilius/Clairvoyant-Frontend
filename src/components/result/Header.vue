@@ -8,7 +8,7 @@
       disabled
     ></v-text-field>
     <h4 class="text-h4 subtitle">The claim is probably {{ verdict }}.</h4>
-    <h6 class="caption">We found {{ report }} evidence.</h6>
+    <h6 class="caption">We uncovered {{ report }} evidence.</h6>
   </v-container>
 </template>
 

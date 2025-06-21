@@ -36,7 +36,7 @@ onMounted(async () => {
     ).then((res) => res.json());
 
     // Wait for both fetch and delay to finish
-    const [fetchedData] = await Promise.all([fetchPromise, delay(2000)]);
+    const [fetchedData] = await Promise.all([fetchPromise, delay(1000)]);
 
     data.value = fetchedData;
   } catch (error) {

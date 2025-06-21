@@ -18,15 +18,21 @@
 <script setup>
 import { ref, watch } from "vue";
 
+// to change the brand subtitle when the submit btn is clicked or
+// the enter key is pressed
 const props = defineProps(["submitBtnClick"]);
 
+// to store the brand subtitle and change it reactively
 const msg = ref("Verify facts and news on the go.");
 
+// listen to the event when the submit btn is clicked
 watch(
   () => props.submitBtnClick,
   (newVal) => {
     if (newVal) {
+      // update the value accordingly
       msg.value = "Sending data to our servers..";
+      // introduce delay when upgrading further
       setTimeout(() => {
         msg.value = "We are working on it..";
       }, 2000);

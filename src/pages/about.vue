@@ -1,5 +1,5 @@
 <template>
-  <v-card class="card">
+  <v-card class="card no-bg">
     <h3 class="text-h4 spacing">About Clairvoyant</h3>
     <p class="text-body break">
       Clairvoyant uses a hybrid natural language inference (NLI) pipeline
@@ -73,5 +73,9 @@ const pipeline = [
 .list {
   padding-top: 15px;
   padding-left: 10px;
+}
+
+.no-bg {
+  background: none;
 }
 </style>

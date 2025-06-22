@@ -1,6 +1,7 @@
 <template>
   <v-form @submit.prevent>
     <v-text-field
+      :rules="[rule]"
       class="spacing"
       v-model="query"
       label="Your query"
@@ -61,6 +62,18 @@ const errorMsg = ref([]);
 // contraints for the text area input
 const errorDescription = ref("");
 
+// apply constraints to the input text field.
+const rule = (v) => {
+  // count the number of words in the text field
+  // OPTIMIZE: Use vue math calc for better performance
+  const wordCount = v.trim().split(/\s+/).filter(Boolean).length;
+
+  if (wordCount === 0) return "Query cannot be empty.";
+  if (wordCount < 4) return "Query must contain at least 4 words.";
+  if (wordCount > 100) return "Query must be below 100 words.";
+  return true;
+};
+
 
 // to evaluate constraints for the selection element
 const selectedErrorRule = (v) => {
@@ -89,6 +102,19 @@ async function load() {
     errorMsg.value.push(
       "Error description must contain atleast 20 characters.",
     );
+  }
+
+  // get the word count
+  // OPTIMIZE: Use vue math calc for better performance
+  const wordCount = query.value.trim().split(/\s+/).filter(Boolean).length;
+
+  // display constraints through the snackbar
+  if (wordCount == 0) {
+    errorMsg.value.push("Query cannot be empty.");
+  } else if (wordCount < 4) {
+    errorMsg.value.push("Query must contain atleast 4 words.");
+  } else if (wordCount > 100) {
+    errorMsg.value.push("Query must be below 100 words.");
   }
 
   // ensure the loading state is atleast 0.2s

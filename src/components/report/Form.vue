@@ -74,7 +74,6 @@ const rule = (v) => {
   return true;
 };
 
-
 // to evaluate constraints for the selection element
 const selectedErrorRule = (v) => {
   if (v === null) return "Error type cannot be empty.";
@@ -92,22 +91,6 @@ async function load() {
   // set the loading state
   loading.value = true;
 
-  // display selection input error if any
-  if (selectedError.value == null) {
-    errorMsg.value.push("Error type cannot be empty.");
-  }
-
-  // display text area errors if any
-  if (errorDescription.value.trim().length < 20) {
-    errorMsg.value.push(
-      "Error description must contain atleast 20 characters.",
-    );
-  }
-
-  // get the word count
-  // OPTIMIZE: Use vue math calc for better performance
-  const wordCount = query.value.trim().split(/\s+/).filter(Boolean).length;
-
   // display constraints through the snackbar
   if (wordCount == 0) {
     errorMsg.value.push("Query cannot be empty.");
@@ -117,16 +100,30 @@ async function load() {
     errorMsg.value.push("Query must be below 100 words.");
   }
 
+  // display selection input error if any
+  if (selectedError.value == null) {
+    errorMsg.value.push("Error type cannot be empty.");
+  }
+
+  // display text area errors if any
+  if (showTextArea.value && errorDescription.value.trim().length < 20) {
+    errorMsg.value.push(
+      "Error description must contain atleast 20 characters.",
+    );
+  }
+
+  // get the word count
+  // OPTIMIZE: Use vue math calc for better performance
+  const wordCount = query.value.trim().split(/\s+/).filter(Boolean).length;
+
   // ensure the loading state is atleast 0.2s
   await new Promise((resolve) => setTimeout(resolve, 200));
   // disable the loading state
   loading.value = false;
 }
 
-
 // to control when to display the text area
 watch(selectedError, (newError) => {
-
   // only display text area for bottom two errors
   if (newError == errors[2] || newError == errors[3]) {
     showTextArea.value = true;

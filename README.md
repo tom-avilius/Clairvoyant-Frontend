@@ -37,13 +37,6 @@ Create a `.env` file for runtime configuration:
 VITE_API_KEY=your_gemini_api_key
 ```
 
-## Project Structure
-
-- `src/views/` — Vue pages showing results and loading states
-- `src/components/` — Reusable Vuetify components
-- `src/router/` — Vue Router setup
-- `src/assets/` — Static assets like stylesheets and images
-
 ## License
 
 GNU GPL v3

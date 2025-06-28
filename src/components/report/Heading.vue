@@ -4,7 +4,7 @@
       Did you notice any inconsistency in the result?
     </h4>
     <h6 class="caption">Help us by reporting errors!</h6>
-    <p class="text-body-1 text">How would rate us:</p>
+    <p class="text-body-1 text">How would you rate us:</p>
     <v-rating
       hover
       :length="5"

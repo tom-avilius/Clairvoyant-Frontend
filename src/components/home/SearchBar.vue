@@ -96,6 +96,7 @@ async function load() {
     // the server also sends a uuid to validate future
     // continuing requests
     sessionStorage.setItem("uuid", data.uuid);
+    sessionStorage.setItem("query", query.value);
 
     // route to the result page
     router.push({

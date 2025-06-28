@@ -55,7 +55,7 @@ const selectedError = ref(null);
 const showTextArea = ref(false);
 // the query entered by the user in the
 // home page
-const query = ref("");
+const query = ref(sessionStorage.getItem("query"));
 // to display the contraint errors using the
 // snackbar.
 const errorMsg = ref([]);
